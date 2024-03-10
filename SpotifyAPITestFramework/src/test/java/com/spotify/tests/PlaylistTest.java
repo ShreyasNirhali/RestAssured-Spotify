@@ -1,21 +1,23 @@
 package com.spotify.tests;
 
 import java.io.IOException;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import com.spotify.api.PlayListAPI;
 import com.spotify.pojo.Playlist;
-
+import io.qameta.allure.*;
 import authmanager.TokenCreator;
 import io.restassured.response.Response;
 import utils.ConfigReader;
 
+@Epic("Spotify Auth 2.0")
+@Feature("Playlist API")
+
 public class PlaylistTest {
 
 	 static String playlistidresponse;
-		
+	    @Story("Create Playlist")
+		@Description("Creating a playlist for 90's songs collection")
 		@Test(priority = 1)
 		public void createPlayList() throws IOException
 		{
@@ -35,6 +37,8 @@ public class PlaylistTest {
 		    Assert.assertEquals(namerequest, nameresponse);
 		}
 		
+	    @Story("Create Playlist")
+		@Description("Getting information for created Playlist")
 		@Test(priority = 2)
 		public void getAPlaylist() throws IOException
 		{
@@ -52,7 +56,9 @@ public class PlaylistTest {
 		}
 		
 		// Assignment to create the method for update playlist API - NEED TO CHECK CODE
-		@Test(priority = 3)
+	    @Story("Update Playlist")
+		@Description("Updating a playlist for 90's songs collection")
+	    @Test(priority = 3)
 		public void updatePlaylist() throws IOException
 		{
 	         Playlist reqplaylist = new Playlist();
@@ -66,6 +72,8 @@ public class PlaylistTest {
 			Assert.assertEquals(statuscode, 200);
 		}
 		
+	    @Story("Create Playlist")
+		@Description("Invalid Auth token for creating playlist")
 		@Test(priority = 4)
 		public void shouldNotBeAbleToCreatePlaylist() throws IOException
 		{
